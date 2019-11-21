@@ -21,7 +21,7 @@ function createFeatures(earthquakeData) {
             var geoJSONMarker = {
                 radius: markerSize(features.properties.mag),
                 fillColor: fillColor(features.properties.mag),
-                color: "pink",
+                color: "orange",
                 weight: 0.5,
                 opacity: 0.5,
                 fillOpacity: 0.8
@@ -67,7 +67,6 @@ function createMap(earthquakes) {
         layers: [streetmap, earthquakes]
     });
 
-    // Create a layer control
     // Pass in our baseMaps and overlayMaps
     // Add the layer control to the map
     L.control.layers(baseMaps, overlayMaps, {
@@ -80,7 +79,7 @@ function createMap(earthquakes) {
         var div = L.DomUtil.create('div', 'legend'),
             magnitude = [0, 1.0, 2.0, 3.0, 4.0, 5.0],
             labels = [];
-        // loop through our magnitude intervals and generate a label with a colored square for each interval
+            
         div.innerHTML ='<div><b>Earthquake <br/> Magnitude</b></div';
         for (var i = 0; i < magnitude.length; i++) {
             div.innerHTML += '<i style= "background:' + fillColor(magnitude[i]) + '"></i> ' +
@@ -90,22 +89,22 @@ function createMap(earthquakes) {
     };
     legend.addTo(myMap);
 }
-function fillColor(mag) {
-    switch (true) {
-        case mag >= 5.0:
-            return '#d73027';
-        case mag >= 4.0:
-            return '#fc8d59';
-        case mag >= 3.0:
-            return '#fee08b';
-        case mag >= 2.0:
-            return '#d9ef8b';
-        case mag >= 1.0:
-            return '#91cf60';
-        case mag < 1.0:
-            return '#1a9850';
+function fillColor(borough) {
+    switch (borough) {
+        case borough >= 5.0:
+            return 'yellow';
+        case borough >= 4.0:
+            return 'purple';
+        case borough >= 3.0:
+            return 'red';
+        case borough >= 2.0:
+            return 'black';
+        case borough >= 1.0:
+            return 'silver';
+        case borough < 1.0:
+            return 'grey';
     };
 };
-function markerSize(mag) {
-    return mag * 4
+function markerSize(borough) {
+    return borough * 4
 };
